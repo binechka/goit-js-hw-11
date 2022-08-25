@@ -46,13 +46,13 @@ const response = await getGallery(formSearch)
             return Notify.failure("Sorry, there are no images matching your search query. Please try again.");
   } catch (error){
 console.log(error);
-  }   
-   let gallery = new SimpleLightbox('.gallery a', {
+  } 
+  const SimpleLightBox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionDelay: 150,
        captionPosition: 'bottom',
     
-})
+}).refresh();
 }
 function addPhoto(data) {
     return data.map(({webformatURL,largeImageURL,tags,likes,views,comments,downloads}) => {
@@ -86,14 +86,21 @@ async function clickPhoto() {
     try {
       const response = await getGallery(formSearch)
     galleryEl.innerHTML += addPhoto(response.hits);
-    currentPage += 1;
+      currentPage += 1;
+     const SimpleLightBox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 150,
+       captionPosition: 'bottom',
+    
+}).refresh();
         
         return response.data;
  
         } catch (error) {
             console.error(error);
-        }
-   
+  }
+ 
+
 }
 
 
